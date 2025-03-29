@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jump Dash</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.json"/>
+  <!-- Using Roboto font from Google for a modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+</head>
+<body>
+  <!-- Header for Score -->
+  <div class="header">
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="high-score">High Score: <span id="high-score">0</span></div>
+  </div>
+
+  <!-- Home Screen -->
+  <div id="home-screen">
+    <h1>Jump Dash</h1>
+    <button id="start-game-btn" class="md-button">Start Game</button>
+  </div>
+
+  <!-- Main Game Container (hidden until game starts) -->
+  <div class="game-container">
+    <!-- Background Layers -->
+    <div id="bg-layer"></div>
+    <div id="particle-layer"></div>
+    <div id="midground"></div>
+    <!-- Game Elements -->
+    <div id="character"></div>
+    <div id="ground"></div>
+  </div>
+
+  <!-- Icon Buttons -->
+  <button id="pause-btn" class="icon-button" title="Pause"></button>
+  <button id="settings-btn" class="icon-button" title="Settings"></button>
+  <!-- Play Button (shown in center when game is paused) -->
+  <button id="play-btn" class="icon-button" title="Play"></button>
+
+  <!-- Settings Panel -->
+  <div id="settings-panel">
+    <h3>Settings</h3>
+    <label>
+      <input type="checkbox" id="audio-toggle" checked />
+      Audio
+    </label>
+    <br />
+    <label>
+      <input type="checkbox" id="haptic-toggle" checked />
+      Haptic Feedback
+    </label>
+    <br />
+    <button id="close-settings-btn" class="md-button">Close</button>
+  </div>
+
+  <!-- Game Over Dialog -->
+  <div id="game-over-screen">
+    <h1>Game Over</h1>
+    <p>Your Score: <span id="final-score">0</span></p>
+    <div class="game-over-actions">
+      <button id="restart-btn" class="md-button">Restart</button>
+      <button id="share-btn" class="md-button">Share Score</button>
+    </div>
+    <h2>Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

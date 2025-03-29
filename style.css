@@ -1,0 +1,352 @@
+/* CSS Variables for a Modern Minimalist Look */
+:root {
+  --primary-bg: #121212;
+  --header-bg: #1e1e1e;
+  --header-text: #e0e0e0;
+  --game-container-bg: #1e1e1e;
+  --gradient-start: #1a237e;    /* Deep blue */
+  --gradient-end: #3949ab;      /* Soft blue */
+  --particle-color: rgba(255, 255, 255, 0.15);
+  --midground-color: #263238;   /* Dark slate */
+  --accent-color: #82b1ff;      /* Light blue accent */
+  --text-color: #e0e0e0;
+  --button-bg: #2962ff;
+  --button-hover: #0039cb;
+  --button-text: #ffffff;
+  --panel-bg: #212121;
+  --panel-border: #424242;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --transition-speed: 0.3s;
+}
+
+/* Global Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--header-bg);
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+.header .score,
+.header .high-score {
+  font-size: 1.2rem;
+  color: var(--header-text);
+}
+
+/* Home Screen */
+#home-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--primary-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+#home-screen h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+}
+.md-button {
+  font-size: 1.25rem;
+  padding: 12px 24px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.md-button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+.md-button:active {
+  transform: scale(0.95);
+}
+
+/* Main Game Container */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 300px;
+  margin: 70px auto 20px;  /* Leave space for header */
+  background: var(--game-container-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: none;
+}
+
+/* Background Layers */
+/* Dynamic Gradient Background */
+#bg-layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  animation: gradientShift 10s ease infinite;
+}
+@keyframes gradientShift {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Particle Layer */
+#particle-layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(45deg, var(--particle-color), var(--particle-color) 2px, transparent 2px, transparent 10px);
+  animation: particleMove 15s linear infinite;
+  opacity: 0.4;
+}
+@keyframes particleMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Midground Layer */
+#midground {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: var(--midground-color);
+  opacity: 0.4;
+  animation: midgroundMove 8s linear infinite;
+}
+@keyframes midgroundMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Character & Ground */
+#character {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-color), var(--button-bg));
+  box-shadow: 0 0 10px var(--accent-color);
+}
+#ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background: #b0bec5;
+  box-shadow: 0 0 5px #90a4ae;
+}
+
+/* Obstacle */
+.obstacle {
+  position: absolute;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  left: 0;
+  background: url('assets/Obstacles.png') no-repeat center center;
+  background-size: cover;
+  will-change: transform;
+}
+
+/* Icon Buttons */
+button.icon-button {
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: transform var(--transition-speed) ease;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  box-shadow: var(--shadow);
+}
+#pause-btn {
+  position: fixed;
+  top: 70px;
+  right: 10px;
+  z-index: 10;
+  background-image: url('assets/pause.png');
+}
+#settings-btn {
+  position: fixed;
+  top: 70px;
+  right: 70px;
+  z-index: 10;
+  background-image: url('assets/setting.png');
+}
+#play-btn {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  z-index: 20;
+  background-image: url('assets/play.png');
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+button.icon-button:hover {
+  transform: scale(1.05);
+}
+button.icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Settings Panel */
+#settings-panel {
+  display: none;
+  position: fixed;
+  top: 20%;
+  right: 20px;
+  background: var(--panel-bg);
+  padding: 15px;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  text-align: left;
+  z-index: 10;
+  transition: opacity 0.5s ease;
+}
+#settings-panel h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+#settings-panel label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: block;
+}
+#close-settings-btn {
+  margin-top: 10px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+#close-settings-btn:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+#close-settings-btn:active {
+  transform: scale(0.95);
+}
+
+/* Game Over Dialog */
+#game-over-screen {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--panel-bg);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--text-color);
+  max-width: 300px;
+  width: 90%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 10;
+}
+#game-over-screen h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+#game-over-screen p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.game-over-actions {
+  margin-bottom: 20px;
+}
+#game-over-screen button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  margin: 5px;
+  transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+#game-over-screen button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+#game-over-screen button:active {
+  transform: scale(0.95);
+}
+
+/* Leaderboard */
+#leaderboard {
+  list-style: none;
+  margin-top: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0;
+}
+#leaderboard li {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Particle Styling */
+.particle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: url('assets/Particles.png') no-repeat center center;
+  background-size: contain;
+  opacity: 1;
+  animation: particleFade 1s forwards;
+}
+@keyframes particleFade {
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  #pause-btn { right: 10px; top: 70px; width: 40px; height: 40px; }
+  #settings-btn { right: 60px; top: 70px; width: 40px; height: 40px; }
+  #settings-panel { top: 15%; right: 10px; padding: 10px; }
+  .header .score, .header .high-score { font-size: 1rem; }
+  .score { font-size: 16px; }
+}
